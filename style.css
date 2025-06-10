@@ -1,0 +1,400 @@
+ /* Custom Styles for LUSO Space Website */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f15;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8B5CF6, #3B82F6);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #7c4dff, #2563eb);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero background with parallax effect */
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* Space card hover effects */
+        .space-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .space-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(139, 69, 255, 0.2);
+            border-color: rgba(139, 69, 255, 0.3);
+        }
+
+        /* Navigation link active state */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #8b5cf6;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(139, 69, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(139, 69, 255, 0.8);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .rotate-slow {
+            animation: rotate 20s linear infinite;
+        }
+
+        /* Background particles effect */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Button hover effects */
+        button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button:hover {
+            box-shadow: 0 20px 40px rgba(139, 69, 255, 0.3);
+        }
+
+        /* Loading animation for images */
+        img {
+            transition: opacity 0.3s ease;
+        }
+
+        img[data-loaded="false"] {
+            opacity: 0;
+        }
+
+        img[data-loaded="true"] {
+            opacity: 1;
+        }
+
+        /* Section fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cosmic border effect */
+        .cosmic-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cosmic-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6, #8b5cf6);
+            border-radius: inherit;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        /* Text selection styling */
+        ::selection {
+            background: rgba(139, 69, 255, 0.3);
+            color: #ffffff;
+        }
+
+        ::-moz-selection {
+            background: rgba(139, 69, 255, 0.3);
+            color: #ffffff;
+        }
+
+        /* Focus states for accessibility */
+        button:focus,
+        a:focus {
+            outline: 2px solid #8b5cf6;
+            outline-offset: 2px;
+        }
+
+        /* Prevent text selection on interactive elements */
+        button,
+        .space-card {
+            user-select: none;
+        }
+
+        /* Performance optimizations */
+        .space-card,
+        button {
+            will-change: transform;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .space-card {
+                border-color: #ffffff;
+            }
+            
+            .nav-link {
+                color: #ffffff;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        /* New: Improved mobile menu */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: rgba(15, 15, 25, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            transition: right 0.3s ease-out;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            padding: 80px 20px 40px;
+            overflow-y: auto;
+        }
+
+        #mobile-menu.show {
+            right: 0;
+        }
+
+        .mobile-menu-link {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu-link:hover {
+            color: #8b5cf6;
+        }
+
+        .close-mobile-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        /* New: Improved planet info panel */
+        #planet-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #planet-info.active {
+            transform: translateY(0);
+        }
+
+        /* New: Improved event cards */
+        .event-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+        }
+
+        /* New: Astronomer card improvements */
+        .astronomer-card {
+            transition: all 0.3s ease;
+        }
+
+        .astronomer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .astronomer-card img {
+            transition: transform 0.5s ease;
+        }
+
+        .astronomer-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Responsive design adjustments */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+            
+            .space-card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
+
+            #solar-system-container {
+                height: 500px !important;
+            }
+        }
+
+        /* New: Starfield animation */
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
