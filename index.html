@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUSO - Cosmic Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/10 transition-all duration-300 hover:bg-black/80">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center shadow-lg">
+                        <i class="fas fa-satellite text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white font-orbitron tracking-tighter">LUSO</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link relative group text-gray-300 hover:text-white transition-colors">
+                        HOME
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#solar-system" class="nav-link relative group text-gray-300 hover:text-white transition-colors">
+                        SOLAR SYSTEM
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#galactic-events" class="nav-link relative group text-gray-300 hover:text-white transition-colors">
+                        GALACTIC EVENTS
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#astronomers" class="nav-link relative group text-gray-300 hover:text-white transition-colors">
+                        ASTRONOMERS
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#beliefs" class="nav-link relative group text-gray-300 hover:text-white transition-colors">
+                        COSMIC BELIEFS
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                        <i class="fas fa-search text-gray-300"></i>
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform shadow-lg">
+                        EXPLORE
+                    </button>
+                    <button id="mobile-menu-btn" class="md:hidden text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <button class="close-mobile-menu" id="close-mobile-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="mobile-menu-link">HOME</a>
+        <a href="#solar-system" class="mobile-menu-link">SOLAR SYSTEM</a>
+        <a href="#galactic-events" class="mobile-menu-link">GALACTIC EVENTS</a>
+        <a href="#astronomers" class="mobile-menu-link">ASTRONOMERS</a>
+        <a href="#beliefs" class="mobile-menu-link">COSMIC BELIEFS</a>
+        <div class="mt-8">
+            <button class="w-full bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-3 rounded-full font-medium">
+                EXPLORE
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section - Our Universe -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 pb-10">
+        <!-- Starfield background -->
+        <div id="starfield" class="absolute inset-0 overflow-hidden"></div>
+        
+        <div class="relative z-20 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight font-orbitron tracking-tighter">
+                        <span class="gradient-text animate-pulse">EXPLORE</span> THE COSMOS
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-lg leading-relaxed">
+                        Journey through the wonders of our universe with interactive 3D models, cosmic phenomena visualizations, and the stories of the great minds who revealed the cosmos to us.
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap gap-4">
+                    <button class="bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform inline-flex items-center space-x-2 group">
+                        <span>Begin Exploration</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <button class="border border-white/20 bg-white/5 px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-colors inline-flex items-center space-x-2">
+                        <i class="fas fa-play"></i>
+                        <span>Watch Intro</span>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-6 pt-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+                        <span class="text-sm text-gray-300">3,124 explorers online</span>
+                    </div>
+                    <div class="h-6 w-px bg-white/20"></div>
+                    <div class="text-sm text-gray-300">
+                        Featured in <span class="text-white">NASA</span>, <span class="text-white">NatGeo</span>, <span class="text-white">Science</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <!-- Floating 3D planet preview -->
+                <div class="relative h-96 w-full rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl">
+                    <div id="hero-planet-preview" class="absolute inset-0"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-xl font-bold font-orbitron">Interactive Solar System</h3>
+                            <p class="text-gray-300 text-sm">Click and drag to explore planets in 3D</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating cards around the planet -->
+                <div class="absolute -bottom-6 -left-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 w-32 hover:scale-110 transition-transform">
+                    <div class="text-purple-400 mb-2"><i class="fas fa-satellite"></i></div>
+                    <p class="text-xs text-gray-300">Real-time astronomical data</p>
+                </div>
+                <div class="absolute -top-6 -right-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 w-32 hover:scale-110 transition-transform">
+                    <div class="text-blue-400 mb-2"><i class="fas fa-vr-cardboard"></i></div>
+                    <p class="text-xs text-gray-300">VR compatible</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scrolling indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <div class="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white mt-2 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Solar System Section -->
+    <section id="solar-system" class="relative py-20 bg-black overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center justify-center px-6 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+                    <span class="text-sm font-medium text-purple-400">INTERACTIVE</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-tighter">
+                    <span class="gradient-text">3D SOLAR SYSTEM</span> EXPLORER
+                </h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Navigate our cosmic neighborhood with this interactive model. Click on planets to reveal detailed information about each celestial body.
+                </p>
+            </div>
+            
+            <div class="relative h-[700px] w-full rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl">
+                <div id="solar-system-container" class="absolute inset-0"></div>
+                
+                <!-- Enhanced planet info panel -->
+                <div id="planet-info" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent backdrop-blur-md p-8 transform translate-y-full transition-all duration-300 z-10 border-t border-white/10">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1">
+                                <h3 id="planet-name" class="text-3xl font-bold mb-4 font-orbitron"></h3>
+                                <p id="planet-description" class="text-gray-300 mb-6 leading-relaxed"></p>
+                                
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-sm text-gray-400 mb-1">Distance from Sun</p>
+                                        <p id="planet-distance" class="font-bold text-white text-lg"></p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-sm text-gray-400 mb-1">Orbital Period</p>
+                                        <p id="planet-period" class="font-bold text-white text-lg"></p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-sm text-gray-400 mb-1">Diameter</p>
+                                        <p id="planet-diameter" class="font-bold text-white text-lg"></p>
+                                    </div>
+                                    <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <p class="text-sm text-gray-400 mb-1">Moons</p>
+                                        <p id="planet-moons" class="font-bold text-white text-lg"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-64 flex-shrink-0">
+                                <div class="bg-white/5 rounded-xl p-6 border border-white/10 h-full flex flex-col">
+                                    <h4 class="text-sm font-bold text-gray-400 mb-4">QUICK FACTS</h4>
+                                    <ul id="planet-facts" class="text-sm text-gray-300 space-y-3 flex-1">
+                                        <!-- Facts will be added dynamically -->
+                                    </ul>
+                                    <button class="mt-4 w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg py-2 text-sm font-medium transition-colors">
+                                        <i class="fas fa-book-open mr-2"></i> Read More
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-colors" onclick="document.getElementById('planet-info').classList.remove('active');">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Enhanced planet selector -->
+            <div class="mt-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold font-orbitron">SELECT A CELESTIAL BODY</h3>
+                    <div class="flex space-x-2">
+                        <button class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fas fa-chevron-left text-xs"></i>
+                        </button>
+                        <button class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-9 gap-3">
+                    <button class="planet-btn group bg-gradient-to-br from-yellow-500 to-orange-500" data-planet="sun">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-sun text-white text-lg"></i>
+                        </div>
+                        <span>Sun</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-gray-400 to-gray-600" data-planet="mercury">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Mercury</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-yellow-200 to-orange-200" data-planet="venus">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Venus</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-blue-500 to-green-500" data-planet="earth">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-globe-americas text-white text-lg"></i>
+                        </div>
+                        <span>Earth</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-red-500 to-orange-500" data-planet="mars">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Mars</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-yellow-600 to-brown-600" data-planet="jupiter">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Jupiter</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-yellow-300 to-brown-300" data-planet="saturn">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Saturn</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-blue-300 to-blue-500" data-planet="uranus">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Uranus</span>
+                    </button>
+                    <button class="planet-btn group bg-gradient-to-br from-blue-400 to-blue-700" data-planet="neptune">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform">
+                            <i class="fas fa-circle text-white text-lg"></i>
+                        </div>
+                        <span>Neptune</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galactic Events Section -->
+    <section id="galactic-events" class="relative py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 font-orbitron">GALACTIC PHENOMENA</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                    Explore the most spectacular events occurring in our galaxy and beyond
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Supernova -->
+                <div class="event-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-48 overflow-hidden">
+                        <div id="supernova-canvas" class="absolute inset-0"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Supernova Explosion</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">A supernova is a powerful and luminous stellar explosion that occurs during the last evolutionary stages of a massive star.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>Occurs about 3 times every century in our galaxy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Black Hole -->
+                <div class="event-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-48 overflow-hidden">
+                        <div id="blackhole-canvas" class="absolute inset-0"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Black Hole</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">A region of spacetime where gravity is so strong that nothing—no particles or even electromagnetic radiation can escape.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Sagittarius A* at our galaxy's center</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nebula -->
+                <div class="event-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-48 overflow-hidden">
+                        <div id="nebula-canvas" class="absolute inset-0"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Nebula Formation</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">Nebulae are giant clouds of dust and gas in space where new stars are born from collapsing gas and dust.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-star mr-2"></i>
+                            <span>Star nurseries like Orion Nebula</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Astronomers Section -->
+    <section id="astronomers" class="relative py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 font-orbitron">GREAT ASTRONOMERS</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                    The visionary minds who expanded our understanding of the cosmos
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Galileo -->
+                <div class="astronomer-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg" 
+                             alt="Galileo Galilei" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Galileo Galilei</h3>
+                        </div>
+                    </div>
+                                                           <div class="p-6">
+                        <p class="text-gray-300 mb-4">The father of modern observational astronomy who improved the telescope and supported the Copernican revolution.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>1564-1642</span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="inline-block bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full text-xs font-medium">Telescope Pioneer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Copernicus -->
+                <div class="astronomer-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Nikolaus_Kopernikus.jpg" 
+                             alt="Nicolaus Copernicus" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Nicolaus Copernicus</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">Formulated the heliocentric model of the universe, placing the Sun rather than Earth at the center.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>1473-1543</span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="inline-block bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-medium">Heliocentrism</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hubble -->
+                <div class="astronomer-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Studio_portrait_photograph_of_Edwin_Powell_Hubble_%28cropped%29.JPG" 
+                             alt="Edwin Hubble" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Edwin Hubble</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">Discovered that galaxies exist beyond the Milky Way and the universe is expanding.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>1889-1953</span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="inline-block bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-medium">Expanding Universe</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sagan -->
+                <div class="astronomer-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Carl_Sagan_Planetary_Society.JPG" 
+                             alt="Carl Sagan" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-6">
+                            <h3 class="text-xl font-bold">Carl Sagan</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4">Astronomer who popularized science through Cosmos and contributed to planetary exploration.</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span>1934-1996</span>
+                        </div>
+                        <div class="mt-4">
+                            <span class="inline-block bg-yellow-500/10 text-yellow-400 px-3 py-1 rounded-full text-xs font-medium">Science Communicator</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button class="border border-white/20 bg-white/5 px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-colors inline-flex items-center space-x-2">
+                    <span>View All Astronomers</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cosmic Beliefs Section -->
+    <section id="beliefs" class="relative py-20 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 font-orbitron">COSMIC BELIEFS</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                    How different cultures interpreted the celestial phenomena throughout history
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+                    <div class="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-star-and-crescent text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Islamic Astronomy</h3>
+                    <p class="text-gray-300 mb-6">Medieval Islamic astronomers made significant advances in observational techniques and developed sophisticated astronomical instruments.</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2"></i>
+                            <span>Developed astrolabes and celestial globes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2"></i>
+                            <span>Named many stars we still use today</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2"></i>
+                            <span>Built some of the first observatories</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+                    <div class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-yin-yang text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Chinese Astronomy</h3>
+                    <p class="text-gray-300 mb-6">One of the longest continuous astronomical records, with observations dating back to the Shang dynasty (1600-1046 BCE).</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                            <span>Recorded supernovae and comets</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                            <span>Developed elaborate star maps</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                            <span>Used astronomy for timekeeping</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+                    <div class="w-16 h-16 rounded-full bg-yellow-500/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-sun text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Mayan Astronomy</h3>
+                    <p class="text-gray-300 mb-6">The Maya civilization developed a sophisticated understanding of astronomy that influenced their calendar systems.</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                            <span>Accurate Venus cycle calculations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                            <span>Elaborate celestial alignments in architecture</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                            <span>Advanced calendar systems</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="relative py-20 bg-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center justify-center px-6 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+                <span class="text-sm font-medium text-purple-400">STAY UPDATED</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 font-orbitron">COSMIC NEWSLETTER</h2>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
+                Subscribe to receive the latest astronomical discoveries, celestial events, and space exploration news directly to your inbox.
+            </p>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-1 bg-white/5 border border-white/10 rounded-full px-6 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <button type="submit" class="bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform">
+                    Subscribe
+                </button>
+            </form>
+            
+            <p class="text-gray-500 text-sm mt-4">
+                We respect your privacy. Unsubscribe at any time.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-gray-900 border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-satellite text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white font-orbitron tracking-tighter">LUSO</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Exploring the wonders of the cosmos through interactive experiences and educational resources.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">EXPLORE</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Solar System</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Galaxies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Exoplanets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cosmic Phenomena</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Space Missions</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">LEARN</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Astronomy Basics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Telescope Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Astrophotography</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Educational Resources</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">COMPANY</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 LUSO Cosmic Exploration. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform hidden">
+        <i class="fas fa-arrow-up text-white"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
